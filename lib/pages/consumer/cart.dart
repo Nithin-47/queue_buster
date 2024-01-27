@@ -52,12 +52,23 @@ class _CartState extends State<Cart> {
               ),
             ),
           ),
+          SizedBox(
+            height: 60,
+            child: Center(
+              child: Text(
+                'Scroll Horizontally to View your orders ->',
+                style:
+                    TextStyle(color: Colors.grey[800], fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
           Expanded(
             child: GridView.builder(
+              scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.all(30),
               itemCount: cartitems.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1, mainAxisSpacing: 12),
+                  crossAxisCount: 1, mainAxisSpacing: 14),
               itemBuilder: (BuildContext context, int index) {
                 return GridTile(
                   // header: GridTileBar(
@@ -117,10 +128,11 @@ class _CartState extends State<Cart> {
                             itemBuilder: (BuildContext context, int i) {
                               return Card(
                                 child: ListTile(
-                                  leading:
-                                      Text('${cartitems[index].items[i].itemName} - Rs ${cartitems[index].items[i].price}'),
-
-                                  trailing: const Icon(Icons.delete),
+                                  leading: Text(
+                                      '${cartitems[index].items[i].itemName} - Rs ${cartitems[index].items[i].price}'),
+                                  trailing: TextButton(
+                                      onPressed: () {},
+                                      child: const Icon(Icons.delete)),
                                 ),
                               );
                             },
@@ -132,6 +144,9 @@ class _CartState extends State<Cart> {
                 );
               },
             ),
+          ),
+          SizedBox(
+            height: 60,
           ),
           Padding(
             padding: const EdgeInsets.all(18.0),
@@ -150,7 +165,8 @@ class _CartState extends State<Cart> {
 
                   color: Colors.lightGreen[500],
                   // border: Border.all(width: 0.0),
-                  borderRadius: const BorderRadius.all(Radius.elliptical(45, 45)),
+                  borderRadius:
+                      const BorderRadius.all(Radius.elliptical(45, 45)),
                 ),
                 child: const Center(child: Text('Checkout')),
               ),
