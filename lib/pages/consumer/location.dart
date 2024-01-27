@@ -52,6 +52,7 @@ class _LocationState extends State<Location> {
                       Text(
                           'Use Current Location',
                           style: TextStyle(
+                            fontSize: 17,
                             color: Colors.amber,
                             fontWeight: FontWeight.bold
                           ),
@@ -86,84 +87,7 @@ class _LocationState extends State<Location> {
 
                   ],
                 ),
-                Container(
-                  // bottomVPa (23:173)
-                  padding: const EdgeInsets.only(top: 14),
-                  width: double.infinity,
-                  height: 68,
-                  // decoration:  BoxDecoration (
-                  //   image:  DecorationImage (
-                  //     fit:  BoxFit.cover,
-                  //     image:  NetworkImage (
-                  //         [Image url]
-                  //     ),
-                  //   ),
-                  // ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        // vector8Be (18:12)
-                        // flex: 1,
-                          child: TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.home,
-                                color: Colors.black,
-                                size: 30,
-                              ),
-                              label: const Text(''))),
-                      Expanded(
-                        // vectorzUk (18:20)
-                        //   flex: 1,
 
-                          child: TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.shop,
-                                color: Colors.black,
-                                size: 30,
-                              ),
-                              label: const Text(''))),
-                      Expanded(
-
-
-                          child: TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.search,
-                                color: Colors.black,
-                                size: 30,
-                              ),
-                              label: const Text(''))),
-                      Expanded(
-                        // vectorCse (18:16)
-                        //   flex: 1,
-
-                          child: TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.add_shopping_cart,
-                                color: Colors.black,
-                                size: 30,
-                              ),
-                              label: const Text(''))),
-                      Expanded(
-                        // vector3dN (18:14)
-                        //   flex: 1,
-
-                          child: TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.settings,
-                                color: Colors.black,
-                                size: 30,
-                              ),
-                              label: const Text(''))),
-                    ],
-                  ),
-                ),
 
 
               ],

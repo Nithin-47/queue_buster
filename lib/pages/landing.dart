@@ -12,7 +12,7 @@ class Landing extends StatelessWidget {
     return SafeArea(
         child: ElevatedButton(
             onPressed: () {
-              context.go(RouteNames.consumerHome.path);
+              context.go(RouteNames.consumerLocation.path);
             },
             child: const Text('Go to Home Page')));
   }

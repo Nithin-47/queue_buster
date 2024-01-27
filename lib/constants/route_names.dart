@@ -1,12 +1,12 @@
 enum RouteNames {
   // authLogin,
   // authRegister,
+  landing,
   consumerHome,
   consumerStores,
   consumerLocation,
   consumerCart,
   consumerSettings,
-  landing,
 }
 
 extension RouteNamesHelper on RouteNames {
@@ -19,15 +19,15 @@ extension RouteNamesHelper on RouteNames {
       case RouteNames.landing:
         return "/";
       case RouteNames.consumerHome:
-        return "home";
+        return "/home";
       case RouteNames.consumerStores:
-        return "stores";
+        return "/stores";
       case RouteNames.consumerLocation:
-        return "location";
+        return "/location";
       case RouteNames.consumerCart:
-        return "cart";
+        return "/cart";
       case RouteNames.consumerSettings:
-        return "settings";
+        return "/settings";
 
     }
   }
