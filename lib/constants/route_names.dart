@@ -23,7 +23,7 @@ extension RouteNamesHelper on RouteNames {
       case RouteNames.consumerStores:
         return "/stores";
       case RouteNames.consumerLocation:
-        return "/location";
+        return "location";
       case RouteNames.consumerCart:
         return "/cart";
       case RouteNames.consumerSettings:

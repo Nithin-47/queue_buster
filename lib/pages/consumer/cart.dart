@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // import 'package:queue_buster/Pages/loading.dart';
 import 'package:queue_buster/constants/cart_items.dart';
 
+import '../../widgets/search_bar.dart';
+
 class Cart extends StatefulWidget {
   const Cart({super.key});
 
@@ -30,25 +32,26 @@ class _CartState extends State<Cart> {
     return SafeArea(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 20),
-            child: Container(
-              // color: Colors.lightGreen[500],
-              height: 60,
-              width: 280,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.elliptical(45, 45)),
-                color: Colors.lightGreen[500],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  child: const Icon(Icons.search),
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 20, bottom: 20),
+          //   child: Container(
+          //     // color: Colors.lightGreen[500],
+          //     height: 60,
+          //     width: 280,
+          //     decoration: BoxDecoration(
+          //       borderRadius: const BorderRadius.all(Radius.elliptical(45, 45)),
+          //       color: Colors.lightGreen[500],
+          //     ),
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(18.0),
+          //       child: Container(
+          //         alignment: Alignment.centerRight,
+          //         child: const Icon(Icons.search),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          const SearchBarApp(),
           SizedBox(
             height: 60,
             child: Center(
@@ -142,7 +145,7 @@ class _CartState extends State<Cart> {
               },
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 60,
           ),
           Padding(

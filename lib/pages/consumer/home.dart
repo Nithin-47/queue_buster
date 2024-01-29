@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../constants/foods.dart';
 import '../../constants/shops.dart';
+import '../../widgets/search_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -123,26 +124,30 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 20),
-                child: Container(
-                  // color: Colors.lightGreen[500],
-                  height: 60,
-                  width: 280,
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        const BorderRadius.all(Radius.elliptical(45, 45)),
-                    color: Colors.lightGreen[500],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: const Icon(Icons.search),
-                    ),
-                  ),
-                ),
-              ),
+              const SizedBox(height: 10,),
+              const SearchBarApp(),
+
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 20, bottom: 20),
+              //   child: Container(
+              //     // color: Colors.lightGreen[500],
+              //     height: 60,
+              //     width: 280,
+              //     decoration: BoxDecoration(
+              //       borderRadius:
+              //           const BorderRadius.all(Radius.elliptical(45, 45)),
+              //       color: Colors.lightGreen[500],
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(18.0),
+              //       child: Container(
+              //         alignment: Alignment.centerRight,
+              //         child: const Icon(Icons.search),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8),
                 child: Row(
