@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:queue_buster/constants/route_names.dart';
 import 'package:queue_buster/pages/consumer/home.dart';
 import 'package:queue_buster/pages/consumer/location.dart';
-import 'package:queue_buster/layouts/consumer_layout.dart';
+import 'package:queue_buster/widgets/consumer_layout.dart';
 import 'package:queue_buster/pages/consumer/stores.dart';
 
 import 'pages/consumer/cart.dart';
@@ -16,6 +16,10 @@ final GoRouter goRouter = GoRouter(
 
   routes: [
 
+
+
+
+
         StatefulShellRoute.indexedStack(
             builder: (context, state, navigationshell) =>
                 ScaffoldWithNavBar(navigationShell: navigationshell),
@@ -23,8 +27,15 @@ final GoRouter goRouter = GoRouter(
               StatefulShellBranch(
                 routes: <RouteBase>[
                   GoRoute(
+                    routes: [
+                      GoRoute(
+                          path: RouteNames.consumerLocation.path,
+                          builder: (context, state) => const Location()
+                      )
+                    ],
                       path: RouteNames.consumerHome.path,
                       builder: (context, state) => const Home()),
+
                 ],
               ),
               StatefulShellBranch(
@@ -51,10 +62,7 @@ final GoRouter goRouter = GoRouter(
             ]),
 
 
-        GoRoute(
-            path: RouteNames.consumerLocation.path,
-            builder: (context, state) => const Location()
-        )
+
       ]
 
 
