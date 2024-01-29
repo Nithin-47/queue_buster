@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:queue_buster/Pages/loading.dart';
 import 'package:queue_buster/constants/route_names.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../constants/foods.dart';
-import '../../constants/shops.dart';
+import 'package:queue_buster/pages/loading.dart';
+import 'package:queue_buster/constants/foods.dart';
+import 'package:queue_buster/constants/shops.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
