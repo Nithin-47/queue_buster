@@ -1,4 +1,4 @@
-# mobile_app
+# Queue Buster
 
 A new Flutter project.
 
