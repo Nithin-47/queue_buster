@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:queue_buster/Pages/loading.dart';
+import 'package:queue_buster/pages/loading.dart';
 
 class Location extends StatefulWidget {
   const Location({super.key});
