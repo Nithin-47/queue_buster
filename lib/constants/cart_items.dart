@@ -1,8 +1,3 @@
-
-
-
-import 'package:mobile_app/pages/consumer/cart.dart';
-
 class CartItems{
 
   String name;

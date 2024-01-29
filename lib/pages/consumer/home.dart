@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/Pages/loading.dart';
-import 'package:mobile_app/constants/route_names.dart';
+import 'package:queue_buster/Pages/loading.dart';
+import 'package:queue_buster/constants/route_names.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile_app/pages/consumer/location.dart';
-
 
 import '../../constants/foods.dart';
 import '../../constants/shops.dart';
@@ -23,7 +21,7 @@ class _HomeState extends State<Home> {
     Foods(name: 'Burger', photo: 'Assets/login.png'),
     Foods(name: 'Tea', photo: 'Assets/login.png'),
     Foods(name: 'Coffee', photo: 'Assets/login.png'),
-    Foods(name: 'Biriyani', photo: 'Assets/login.png'),
+    Foods(name: 'Biryani', photo: 'Assets/login.png'),
     Foods(name: 'Biscuits', photo: 'Assets/login.png'),
     Foods(name: 'Chiya', photo: 'Assets/login.png'),
     Foods(name: 'Maggie', photo: 'Assets/login.png'),

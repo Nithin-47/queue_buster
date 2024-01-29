@@ -1,10 +1,9 @@
 import 'package:go_router/go_router.dart';
-import 'package:mobile_app/constants/route_names.dart';
-import 'package:mobile_app/pages/consumer/home.dart';
-import 'package:mobile_app/pages/consumer/location.dart';
-import 'package:mobile_app/layouts/consumer_layout.dart';
-import 'package:mobile_app/pages/consumer/stores.dart';
-import 'package:mobile_app/pages/landing.dart';
+import 'package:queue_buster/constants/route_names.dart';
+import 'package:queue_buster/pages/consumer/home.dart';
+import 'package:queue_buster/pages/consumer/location.dart';
+import 'package:queue_buster/layouts/consumer_layout.dart';
+import 'package:queue_buster/pages/consumer/stores.dart';
 
 import 'pages/consumer/cart.dart';
 import 'pages/consumer/settings.dart';

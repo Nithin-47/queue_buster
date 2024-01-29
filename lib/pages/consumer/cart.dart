@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app/Pages/loading.dart';
-
-import 'package:flutter/cupertino.dart';
-
-import '../../constants/cart-items.dart';
+// import 'package:queue_buster/Pages/loading.dart';
+import 'package:queue_buster/constants/cart_items.dart';
 
 class Cart extends StatefulWidget {
   const Cart({super.key});

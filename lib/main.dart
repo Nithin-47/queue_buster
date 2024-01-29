@@ -1,8 +1,5 @@
-
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-
-import "package:mobile_app/router.dart";
+import "package:queue_buster/router.dart";
 
 void main() {
   runApp(MaterialApp.router(
