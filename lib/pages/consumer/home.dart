@@ -437,9 +437,9 @@ class _HomeState extends State<Home> {
 
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisSpacing: 12,
-                                  crossAxisSpacing: 12,
-                                  // childAspectRatio: 1,
+                                  mainAxisSpacing: 24,
+                                  crossAxisSpacing: 24,
+                                  childAspectRatio: 1.8,
                                   crossAxisCount: 2
                               ),
                           // Try uncommenting some of these properties to see the effect on the grid:

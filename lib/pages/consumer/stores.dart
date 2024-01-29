@@ -18,6 +18,7 @@ class _StoresState extends State<Stores> {
     Shops(name: 'Vidyarthi Khaana',photo: 'Assets/login.png'),
 
 
+
   ];
 
 
