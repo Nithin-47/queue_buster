@@ -1,5 +1,9 @@
+
 import 'package:flutter/material.dart';
+
 import '../constants/cart_items.dart';
+import '../constants/route_names.dart';
+import '../main.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -10,14 +14,45 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
 
-  List<Item> items = [
+  List<Item> items = [];
 
-  Item(itemName: 'Veg Fried Maggie', price: '40'),
-  Item(itemName: 'Kurkure', price: '20'),
-  Item(itemName: 'Samosa', price: '20'),
-  Item(itemName: 'Paneer Roll', price: '60'),
 
-  ];
+
+  // List<Item> items = [
+  //
+  // Item(itemName: 'Veg Fried Maggie', price: '40'),
+  // Item(itemName: 'Kurkure', price: '20'),
+  // Item(itemName: 'Samosa', price: '20'),
+  // Item(itemName: 'Paneer Roll', price: '60'),
+  //
+  // ];
+
+
+
+  void getData() async {
+    try {
+      final data = await supabase.from('items').select('name');
+
+      for (var elements in data) {
+        elements.forEach((_, shopName) {
+          shops.add(Shop(name: shopName, photo: ""));
+        });
+
+        setState(() {});
+      }
+    } catch (e) {
+      debugPrint("Error: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getData();
+
+    // resData.forEach((element) { })
+  }
 
   @override
   Widget build(BuildContext context) {

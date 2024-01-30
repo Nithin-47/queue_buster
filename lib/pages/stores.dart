@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:queue_buster/constants/shops.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
-import 'package:queue_buster/constants/route_names.dart';
+
+import '../constants/route_names.dart';
+import '../main.dart';
 
 class StoresPage extends StatefulWidget {
   const StoresPage({super.key});
@@ -12,11 +15,39 @@ class StoresPage extends StatefulWidget {
 }
 
 class _StoresPageState extends State<StoresPage> {
-  List<Shops> shops = [
-    Shops(name: 'Gowda Canteen', photo: 'Assets/login.png'),
-    Shops(name: 'Just Bake', photo: 'Assets/login.png'),
-    Shops(name: 'Vidyarthi Khaana', photo: 'Assets/login.png'),
-  ];
+  List<Shop> shops = [];
+  // bool isLoading = true;
+
+  void getData() async {
+    try {
+      final data = await supabase.from('stores').select('name');
+
+      for (var elements in data) {
+        elements.forEach((_, shopName) {
+          shops.add(Shop(name: shopName, photo: ""));
+        });
+
+        setState(() {});
+      }
+    } catch (e) {
+      debugPrint("Error: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getData();
+
+    // resData.forEach((element) { })
+  }
+
+  // List<Shops> shops = [
+  //   Shops(name: "Louda Canteen", photo: 'Assets/login.png'),
+  //   Shops(name: 'Just Bake', photo: 'Assets/login.png'),
+  //   Shops(name: 'Vidyarthi Khaana', photo: 'Assets/login.png'),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +190,7 @@ class _StoresPageState extends State<StoresPage> {
             height: 40,
             child: Center(
               child: Text(
-                  'Nearby Stores',
+                'Nearby Stores',
                 style: TextStyle(
                   color: Colors.grey[800],
                   fontSize: 20,
@@ -172,7 +203,7 @@ class _StoresPageState extends State<StoresPage> {
             height: 12,
           ),
           Expanded(
-            child: ListView.builder(
+            child: shops.isNotEmpty ? ListView.builder(
               padding: const EdgeInsets.all(8),
               itemCount: shops.length,
               itemBuilder: (BuildContext context, int index) {
@@ -190,6 +221,11 @@ class _StoresPageState extends State<StoresPage> {
                   ),
                 );
               },
+            ) : const Center(
+              child: SpinKitSpinningLines(
+                size: 140,
+                color: Colors.black,
+              ),
             ),
           )
         ]));

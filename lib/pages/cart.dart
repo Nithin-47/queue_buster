@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:queue_buster/constants/cart_items.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
 
+import '../main.dart';
+
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
@@ -24,6 +26,38 @@ class _CartPageState extends State<CartPage> {
       Item(itemName: 'Paneer Roll', price: '60')
     ]),
   ];
+
+  // List<CartItems> cartitems = [];
+  //
+  // void getData() async {
+  //   try {
+  //     final data = await supabase.from('items').select('name');
+  //
+  //     for (var elements in data) {
+  //       elements.forEach((_, shopName) {
+  //         shops.add(Shop(name: shopName, photo: ""));
+  //       });
+  //
+  //       setState(() {});
+  //     }
+  //   } catch (e) {
+  //     debugPrint("Error: $e");
+  //   }
+  // }
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   getData();
+  //
+  //   // resData.forEach((element) { })
+  // }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
