@@ -6,6 +6,8 @@ enum RouteNames {
   selectLocation,
   cart,
   settings,
+  profile,
+  menu
 }
 
 extension RouteNamesHelper on RouteNames {
@@ -25,6 +27,10 @@ extension RouteNamesHelper on RouteNames {
         return "/cart";
       case RouteNames.settings:
         return "/settings";
+      case RouteNames.profile:
+        return "/profile";
+      case RouteNames.menu:
+        return "/menu";
 
     }
   }

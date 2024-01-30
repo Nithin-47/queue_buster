@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:queue_buster/constants/shops.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
+
+import '../constants/route_names.dart';
 
 class StoresPage extends StatefulWidget {
   const StoresPage({super.key});
@@ -174,12 +177,17 @@ class _StoresPageState extends State<StoresPage> {
               padding: const EdgeInsets.all(8),
               itemCount: shops.length,
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: ListTile(
-                    leading: Image(image: AssetImage(shops[index].photo)),
-                    title: Text(shops[index].name),
-                    subtitle: const Text('Here is a second line'),
-                    trailing: const Icon(Icons.more_vert),
+                return InkWell(
+                  onTap: () {
+                    context.push(RouteNames.menu.path);
+                  },
+                  child: Card(
+                    child: ListTile(
+                      leading: Image(image: AssetImage(shops[index].photo)),
+                      title: Text(shops[index].name),
+                      subtitle: const Text('Here is a second line'),
+                      trailing: const Icon(Icons.more_vert),
+                    ),
                   ),
                 );
               },

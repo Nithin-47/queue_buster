@@ -114,10 +114,16 @@ class _HomePageState extends State<HomePage> {
                               offset: Offset(0.0, 1.0)),
                         ],
                       ),
-                      child: CircleAvatar(
-                        backgroundImage: const AssetImage('Assets/login.png'),
-                        radius: 35,
-                        backgroundColor: Colors.lightGreen[500],
+                      child: InkWell(
+                        onTap: () {
+                          context.push(RouteNames.profile.path);
+                        },
+                        child: CircleAvatar(
+
+                          backgroundImage: const AssetImage('Assets/login.png'),
+                          radius: 35,
+                          backgroundColor: Colors.lightGreen[500],
+                        ),
                       ),
                     ),
                   ],
