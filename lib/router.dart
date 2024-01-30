@@ -60,7 +60,7 @@ final GoRouter goRouter =
           routes: <RouteBase>[
             GoRoute(
                 path: RouteNames.settings.path,
-                builder: (context, state) => const SettingsPage()),
+                builder: (context, state) => const Settings()),
           ],
         ),
       ]),

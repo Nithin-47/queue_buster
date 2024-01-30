@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 import '../constants/cart_items.dart';
@@ -19,14 +19,6 @@ class _MenuState extends State<Menu> {
   Item(itemName: 'Kurkure', price: '20'),
   Item(itemName: 'Samosa', price: '20'),
   Item(itemName: 'Paneer Roll', price: '60'),
-    Item(itemName: 'Veg Fried Maggie', price: '40'),
-    Item(itemName: 'Kurkure', price: '20'),
-    Item(itemName: 'Samosa', price: '20'),
-    Item(itemName: 'Paneer Roll', price: '60'),
-    Item(itemName: 'Veg Fried Maggie', price: '40'),
-    Item(itemName: 'Kurkure', price: '20'),
-    Item(itemName: 'Samosa', price: '20'),
-    Item(itemName: 'Paneer Roll', price: '60')
 
   ];
 

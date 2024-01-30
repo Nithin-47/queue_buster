@@ -79,7 +79,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
           NavigationDestination(
               selectedIcon: Icon(Icons.settings),
               icon: Icon(Icons.settings_outlined),
-              label: "Cart"),
+              label: "Settings"),
 
         ],
         selectedIndex: navigationShell.currentIndex,
