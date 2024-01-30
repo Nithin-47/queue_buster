@@ -4,7 +4,7 @@ class ProfileInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(6, 40, 10, 30),
+      margin: const EdgeInsets.fromLTRB(7, 40, 10, 30),
       padding: const EdgeInsets.fromLTRB(4.2, 3.3, 3.5, 1.4),
       width: double.infinity,
       height: 120,
