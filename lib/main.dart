@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import "package:queue_buster/router.dart";
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://iqkgaxhigqltsmxtkcsk.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlxa2dheGhpZ3FsdHNteHRrY3NrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY1NTQ0OTYsImV4cCI6MjAyMjEzMDQ5Nn0.5oj8Ss2Oa8qXzzba_E2zo0b7TjAumij2ESL5eiq-tyo',
+  );
+
   runApp(MaterialApp.router(
     theme: ThemeData(),
     darkTheme: ThemeData.dark(),
     themeMode: ThemeMode.system,
     routerConfig: goRouter,
-    // initialRoute: '/navigationBar',
-    //
-    // routes: {
-    //   '/': (context) => Loading(),
-    //   '/home': (context) => Home(),
-    //   '/location' : (context) => Location(),
-    //   '/navigationBar' : (context) => BottomNavigationBarExample(),
-    //
-    // },
-
-
   ));
 }
 
+final supabase = Supabase.instance.client;

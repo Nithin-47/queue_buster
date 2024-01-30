@@ -1,7 +1,7 @@
 enum RouteNames {
   // authLogin,
   // authRegister,
-  landing,
+  redirector, // redirects based on the role
   consumerHome,
   consumerStores,
   consumerLocation,
@@ -16,14 +16,14 @@ extension RouteNamesHelper on RouteNames {
       //   return "/auth/login";
       // case RouteNames.authRegister:
       //   return "/auth/register";
-      case RouteNames.landing:
+      case RouteNames.redirector:
         return "/";
       case RouteNames.consumerHome:
-        return "/home";
+        return "/consumer";
       case RouteNames.consumerStores:
         return "/stores";
       case RouteNames.consumerLocation:
-        return "location";
+        return "/location";
       case RouteNames.consumerCart:
         return "/cart";
       case RouteNames.consumerSettings:
@@ -38,7 +38,7 @@ extension RouteNamesHelper on RouteNames {
       //   return "auth-login";
       // case RouteNames.authRegister:
       //   return "auth-register";
-      case RouteNames.landing:
+      case RouteNames.redirector:
         return "landing";
       case RouteNames.consumerHome:
         return "consumer-home";

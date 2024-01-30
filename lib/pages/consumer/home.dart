@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:queue_buster/pages/loading.dart';
 import 'package:queue_buster/constants/foods.dart';
 import 'package:queue_buster/constants/shops.dart';
+import 'package:queue_buster/widgets/search_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.only(left: 18.0),
                       child: InkWell(
                         onTap: () {
-                          context.go(RouteNames.consumerLocation.path);
+                          context.push(RouteNames.consumerLocation.path);
                         },
                         borderRadius:
                             const BorderRadius.all(Radius.elliptical(45, 45)),
