@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:queue_buster/constants/shops.dart';
+import 'package:queue_buster/widgets/search_bar.dart';
 
-import '../../constants/shops.dart';
-import '../../widgets/search_bar.dart';
-
-class Stores extends StatefulWidget {
-  const Stores({super.key});
+class StoresPage extends StatefulWidget {
+  const StoresPage({super.key});
 
   @override
-  State<Stores> createState() => _StoresState();
+  State<StoresPage> createState() => _StoresPageState();
 }
 
-class _StoresState extends State<Stores> {
+class _StoresPageState extends State<StoresPage> {
   List<Shops> shops = [
     Shops(name: 'Gowda Canteen', photo: 'Assets/login.png'),
     Shops(name: 'Just Bake', photo: 'Assets/login.png'),

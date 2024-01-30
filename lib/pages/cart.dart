@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-// import 'package:queue_buster/Pages/loading.dart';
 import 'package:queue_buster/constants/cart_items.dart';
+import 'package:queue_buster/widgets/search_bar.dart';
 
-import '../../widgets/search_bar.dart';
-
-class Cart extends StatefulWidget {
-  const Cart({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<Cart> createState() => _CartState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _CartState extends State<Cart> {
+class _CartPageState extends State<CartPage> {
   List<CartItems> cartitems = [
     CartItems(name: 'Gowda Canteen', location: 'BMS College', items: [
       Item(itemName: 'Veg Fried Maggie', price: '40'),

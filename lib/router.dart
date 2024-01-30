@@ -1,50 +1,55 @@
 import 'package:go_router/go_router.dart';
 import 'package:queue_buster/constants/route_names.dart';
-import 'package:queue_buster/pages/consumer/home.dart';
-import 'package:queue_buster/pages/consumer/location.dart';
+import 'package:queue_buster/pages/login.dart';
+import 'package:queue_buster/pages/select-location.dart';
+import 'package:queue_buster/pages/settings.dart';
+import 'package:queue_buster/pages/signup.dart';
+import 'package:queue_buster/pages/home.dart';
+import 'package:queue_buster/pages/stores.dart';
 import 'package:queue_buster/widgets/consumer_layout.dart';
-import 'package:queue_buster/pages/consumer/stores.dart';
-
-import 'pages/consumer/cart.dart';
-import 'pages/consumer/settings.dart';
+import 'package:queue_buster/pages/cart.dart';
 
 final GoRouter goRouter =
-    GoRouter(initialLocation: "/", routes: [
+    GoRouter(initialLocation: RouteNames.home.path, routes: [
+  ShellRoute(routes: [
+    GoRoute(
+        path: RouteNames.authSignup.path,
+        builder: (context, state) => const SignupPage()),
+    GoRoute(
+        path: RouteNames.authLogin.path,
+        builder: (context, state) => const LoginPage()),
+  ]),
+  GoRoute(
+      path: RouteNames.selectLocation.path,
+      builder: (context, state) => const SelectLocationPage()),
   StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>
           ScaffoldWithNavBar(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           routes: <RouteBase>[
-            GoRoute(
-                routes: [
-                  GoRoute(
-                      path: "location",
-                      builder: (context, state) => const Location())
-                ],
-                path: "/",
-                builder: (context, state) => const Home()),
+            GoRoute(path: RouteNames.home.path, builder: (context, state) => const HomePage()),
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
             GoRoute(
-                path: RouteNames.consumerStores.path,
-                builder: (context, state) => const Stores()),
+                path: RouteNames.stores.path,
+                builder: (context, state) => const StoresPage()),
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
             GoRoute(
-                path: RouteNames.consumerCart.path,
-                builder: (context, state) => const Cart()),
+                path: RouteNames.cart.path,
+                builder: (context, state) => const CartPage()),
           ],
         ),
         StatefulShellBranch(
           routes: <RouteBase>[
             GoRoute(
-                path: RouteNames.consumerSettings.path,
-                builder: (context, state) => const Settings()),
+                path: RouteNames.settings.path,
+                builder: (context, state) => const SettingsPage()),
           ],
         ),
       ]),
