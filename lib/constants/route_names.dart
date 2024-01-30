@@ -1,55 +1,36 @@
 enum RouteNames {
-  // authLogin,
-  // authRegister,
-  redirector, // redirects based on the role
-  consumerHome,
-  consumerStores,
-  consumerLocation,
-  consumerCart,
-  consumerSettings,
+  authLogin,
+  authSignup,
+  home,
+  stores,
+  selectLocation,
+  cart,
+  settings,
+  profile,
+  menu
 }
 
 extension RouteNamesHelper on RouteNames {
   String get path {
     switch(this) {
-      // case RouteNames.authLogin:
-      //   return "/auth/login";
-      // case RouteNames.authRegister:
-      //   return "/auth/register";
-      case RouteNames.redirector:
+      case RouteNames.authLogin:
+        return "/auth/login";
+      case RouteNames.authSignup:
+        return "/auth/register";
+      case RouteNames.home:
         return "/";
-      case RouteNames.consumerHome:
-        return "/consumer";
-      case RouteNames.consumerStores:
+      case RouteNames.stores:
         return "/stores";
-      case RouteNames.consumerLocation:
-        return "/location";
-      case RouteNames.consumerCart:
+      case RouteNames.selectLocation:
+        return "/select-location";
+      case RouteNames.cart:
         return "/cart";
-      case RouteNames.consumerSettings:
+      case RouteNames.settings:
         return "/settings";
-
-    }
-  }
-
-  String get name {
-    switch(this) {
-      // case RouteNames.authLogin:
-      //   return "auth-login";
-      // case RouteNames.authRegister:
-      //   return "auth-register";
-      case RouteNames.redirector:
-        return "landing";
-      case RouteNames.consumerHome:
-        return "consumer-home";
-      case RouteNames.consumerStores:
-        return "consumer-stores";
-      case RouteNames.consumerLocation:
-        return "consumer-location";
-      case RouteNames.consumerCart:
-        return "consumer-cart";
-      case RouteNames.consumerSettings:
-        return "consumer-settings";
+      case RouteNames.profile:
+        return "/profile";
+      case RouteNames.menu:
+        return "/menu";
 
     }
   }

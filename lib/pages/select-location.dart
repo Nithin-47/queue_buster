@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:queue_buster/pages/loading.dart';
 
-import '../../widgets/search_bar.dart';
+import '../widgets/search_bar.dart';
 
-class Location extends StatefulWidget {
-  const Location({super.key});
+class SelectLocationPage extends StatefulWidget {
+  const SelectLocationPage({super.key});
 
   @override
-  State<Location> createState() => _LocationState();
+  State<SelectLocationPage> createState() => _SelectLocationPageState();
 }
 
-class _LocationState extends State<Location> {
+class _SelectLocationPageState extends State<SelectLocationPage> {
 
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) => isLoading
-      ? const Loading()
+      ? const LoadingPage()
       :const SafeArea(
             child: Column(
               children: [

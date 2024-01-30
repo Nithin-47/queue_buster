@@ -6,14 +6,14 @@ import 'package:queue_buster/constants/foods.dart';
 import 'package:queue_buster/constants/shops.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   bool isLoading = false;
 
   List<Foods> foods = [
@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) => isLoading
-      ? const Loading()
+      ? const LoadingPage()
       : SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.only(left: 18.0),
                       child: InkWell(
                         onTap: () {
-                          context.push(RouteNames.consumerLocation.path);
+                          context.push(RouteNames.selectLocation.path);
                         },
                         borderRadius:
                             const BorderRadius.all(Radius.elliptical(45, 45)),
@@ -114,10 +114,16 @@ class _HomeState extends State<Home> {
                               offset: Offset(0.0, 1.0)),
                         ],
                       ),
-                      child: CircleAvatar(
-                        backgroundImage: const AssetImage('Assets/login.png'),
-                        radius: 35,
-                        backgroundColor: Colors.lightGreen[500],
+                      child: InkWell(
+                        onTap: () {
+                          context.push(RouteNames.profile.path);
+                        },
+                        child: CircleAvatar(
+
+                          backgroundImage: const AssetImage('Assets/login.png'),
+                          radius: 35,
+                          backgroundColor: Colors.lightGreen[500],
+                        ),
                       ),
                     ),
                   ],
