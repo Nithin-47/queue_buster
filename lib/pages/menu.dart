@@ -1,17 +1,14 @@
-
 import 'package:flutter/material.dart';
-
 import '../constants/cart_items.dart';
-import '../constants/route_names.dart';
 
-class Menu extends StatefulWidget {
-  const Menu({super.key});
+class MenuPage extends StatefulWidget {
+  const MenuPage({super.key});
 
   @override
-  State<Menu> createState() => _MenuState();
+  State<MenuPage> createState() => _MenuPageState();
 }
 
-class _MenuState extends State<Menu> {
+class _MenuPageState extends State<MenuPage> {
 
   List<Item> items = [
 

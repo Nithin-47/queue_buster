@@ -1,6 +1,7 @@
 enum RouteNames {
   authLogin,
   authSignup,
+  emailVerification,
   home,
   stores,
   selectLocation,
@@ -12,11 +13,13 @@ enum RouteNames {
 
 extension RouteNamesHelper on RouteNames {
   String get path {
-    switch(this) {
+    switch (this) {
       case RouteNames.authLogin:
         return "/auth/login";
       case RouteNames.authSignup:
-        return "/auth/register";
+        return "/auth/signup";
+      case RouteNames.emailVerification:
+        return "/auth/email-verification";
       case RouteNames.home:
         return "/";
       case RouteNames.stores:

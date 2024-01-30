@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:queue_buster/constants/shops.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
-
-import '../constants/route_names.dart';
+import 'package:queue_buster/constants/route_names.dart';
 
 class StoresPage extends StatefulWidget {
   const StoresPage({super.key});
