@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                           const Padding(
                             padding: EdgeInsets.only(top: 5, right: 30),
                             child: Text(
-                              'Kudla',
+                              'BMSCE',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:queue_buster/constants/cart_items.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:queue_buster/models/boxes.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
+import "package:collection/collection.dart";
 
-import '../main.dart';
+import 'package:queue_buster/models/cart_item.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -12,20 +14,48 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<CartItems> cartitems = [
-    CartItems(name: 'Gowda Canteen', location: 'BMS College', items: [
-      Item(itemName: 'Veg Fried Maggie', price: 40,quantity: 0),
-      Item(itemName: 'Kurkure', price: 20,quantity: 0),
-      Item(itemName: 'Samosa', price: 20,quantity: 0),
-      Item(itemName: 'Paneer Roll', price: 60,quantity: 0)
-    ]),
-    // CartItems(name: 'Just Bake', location: 'BMS College', items: [
-    //   Item(itemName: 'Veg Fried Maggie', price: '40'),
-    //   Item(itemName: 'Kurkure', price: '20'),
-    //   Item(itemName: 'Samosa', price: '20'),
-    //   Item(itemName: 'Paneer Roll', price: '60')
-    // ]),
-  ];
+  List<List<CartItem>> groupedItems = [];
+
+  Future<void> loadData() async {
+    List<CartItem> items = boxCartItems.values.toList() as List<CartItem>;
+
+    Map<int, List<CartItem>> grouped = groupBy(items, (ele) => ele.storeId);
+
+    groupedItems.clear();
+
+    grouped.forEach((key, value) {
+      groupedItems.add(value);
+    });
+
+    setState(() {});
+  }
+
+  Future<void> removeItem(int id) async {
+    boxCartItems.delete(id);
+    await loadData();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadData();
+  }
+
+  // List<CartItems> cartitems = [
+  //   CartItems(name: 'Gowda Canteen', location: 'BMS College', items: [
+  //     Item(name: 'Veg Fried Maggie', price: 40,quantity: 0),
+  //     Item(name: 'Kurkure', price: 20,quantity: 0),
+  //     Item(name: 'Samosa', price: 20,quantity: 0),
+  //     Item(name: 'Paneer Roll', price: 60,quantity: 0)
+  //   ]),
+  // CartItems(name: 'Just Bake', location: 'BMS College', items: [
+  //   Item(itemName: 'Veg Fried Maggie', price: '40'),
+  //   Item(itemName: 'Kurkure', price: '20'),
+  //   Item(itemName: 'Samosa', price: '20'),
+  //   Item(itemName: 'Paneer Roll', price: '60')
+  // ]),
+  // ];
 
   // List<CartItems> cartitems = [];
   //
@@ -54,11 +84,6 @@ class _CartPageState extends State<CartPage> {
   //   // resData.forEach((element) { })
   // }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -83,99 +108,113 @@ class _CartPageState extends State<CartPage> {
           //     ),
           //   ),
           // ),
-          const SearchBarApp(),
+          // const SearchBarApp(),
           SizedBox(
             height: 60,
             child: Center(
               child: Text(
                 'Scroll Horizontally to View your orders ->',
-                style:
-                    TextStyle(color: Colors.grey[800], fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.grey[800], fontWeight: FontWeight.bold),
               ),
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.all(30),
-              itemCount: cartitems.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 1, mainAxisSpacing: 14),
-              itemBuilder: (BuildContext context, int index) {
-                return GridTile(
-                  // header: GridTileBar(
-                  //   title: Text(cartitems[index].name,
-                  //       style: const TextStyle(color: Colors.black)),
-                  // ),
-                  child: Container(
-                    // color: Colors.grey,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(30),
-                        bottom: Radius.circular(30),
-                      ),
-                      color: Colors.lightGreen[500],
-                      boxShadow: const [
-                        BoxShadow(
-                            blurRadius: 5,
-                            color: Colors.grey,
-                            spreadRadius: 0,
-                            offset: Offset(2.0, 0.0))
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12, left: 12),
-                          child: Row(
+            child: groupedItems.isNotEmpty
+                ? GridView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.all(30),
+                    itemCount: groupedItems.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1, mainAxisSpacing: 14),
+                    itemBuilder: (BuildContext context, int index) {
+                      return groupedItems[index].isNotEmpty ? GridTile(
+                        // header: GridTileBar(
+                        //   title: Text(cartitems[index].name,
+                        //       style: const TextStyle(color: Colors.black)),
+                        // ),
+                        child: Container(
+                          // color: Colors.grey,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(30),
+                              bottom: Radius.circular(30),
+                            ),
+                            color: Colors.lightGreen[500],
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 5,
+                                  color: Colors.grey,
+                                  spreadRadius: 0,
+                                  offset: Offset(2.0, 0.0))
+                            ],
+                          ),
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(Icons.pin_drop),
-                              const SizedBox(width: 4),
-                              Text(cartitems[index].name,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ))
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 12, left: 12),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.pin_drop),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                        groupedItems[index][0].storeName,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ))
+                                  ],
+                                ),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 40),
+                                child: Text(
+                                  'Location : BMSCE',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: ListView.builder(
+                                  padding: const EdgeInsets.all(8),
+                                  itemCount: groupedItems[index].length,
+                                  itemBuilder: (BuildContext context, int i) {
+                                    return Card(
+                                      child: ListTile(
+                                        leading: Text(
+                                            '${groupedItems[index][i].name} - Rs ${groupedItems[index][i].price}'),
+                                        trailing: TextButton(
+                                            onPressed: () async {
+                                              await removeItem(groupedItems[index][i].id);
+                                            },
+                                            child: const Icon(Icons.delete)),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 40),
-                          child: Text(
-                            'Location : ${cartitems[index].location}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            padding: const EdgeInsets.all(8),
-                            itemCount: cartitems[index].items.length,
-                            itemBuilder: (BuildContext context, int i) {
-                              return Card(
-                                child: ListTile(
-                                  leading: Text(
-                                      '${cartitems[index].items[i].itemName} - Rs ${cartitems[index].items[i].price}'),
-                                  trailing: TextButton(
-                                      onPressed: () {},
-                                      child: const Icon(Icons.delete)),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
+                      ) : const Center(
+                        child: Text("No Items added"),
+                      );
+                    },
+                  )
+                : const Center(
+                    child: SpinKitSpinningLines(
+                      size: 140,
+                      color: Colors.black,
                     ),
                   ),
-                );
-              },
-            ),
           ),
           const SizedBox(
             height: 60,

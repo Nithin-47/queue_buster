@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:queue_buster/models/boxes.dart';
+import 'package:queue_buster/models/cart_item.dart';
 
 import '../constants/cart_items.dart';
 import '../constants/route_names.dart';
 import '../main.dart';
 
 class MenuPage extends StatefulWidget {
-  final int id;
+  final int storeId;
 
-  const MenuPage({super.key, required this.id});
+  const MenuPage({super.key, required this.storeId});
 
   @override
   State<MenuPage> createState() => _MenuPageState();
@@ -16,7 +18,6 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
   List<Item> items = [];
-
 
   // List<Item> items = [
   //
@@ -31,12 +32,17 @@ class _MenuPageState extends State<MenuPage> {
     try {
       final data = await supabase
           .from('items')
-          .select('name,price,store_id')
-          .eq('store_id', widget.id);
+          .select('id,name,price,store_id, stores(name)')
+          .eq('store_id', widget.storeId);
 
       for (var elements in data) {
-        // debugPrint("hey there!");
-        items.add(Item(itemName: elements["name"], price: elements["price"], quantity: 0));
+        items.add(Item(
+            id: elements["id"],
+            name: elements["name"],
+            price: elements["price"],
+            storeId: elements["store_id"],
+            storeName: elements["stores"]["name"],
+            quantity: 0));
         setState(() {});
       }
     } catch (e) {
@@ -47,7 +53,7 @@ class _MenuPageState extends State<MenuPage> {
   @override
   void initState() {
     super.initState();
-    debugPrint("${widget.id}");
+    debugPrint("${widget.storeId}");
     getData();
 
     // resData.forEach((element) { })
@@ -80,7 +86,7 @@ class _MenuPageState extends State<MenuPage> {
             child: const Column(children: [
               Center(
                 child: Text(
-                  'Lol ke bache',
+                  'Lund Ke Baal',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 35,
@@ -108,52 +114,95 @@ class _MenuPageState extends State<MenuPage> {
           flex: 3,
           child: items.isNotEmpty
               ? ListView.builder(
-
                   padding: const EdgeInsets.all(8),
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
-                    int itemCounter = 0;
-
                     return Card(
-                      elevation: 2,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 80,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(items[index].itemName,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                              Text('price - ${items[index].price}',style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),)
-                            ],
-                          ),
-                          SizedBox(width: 105,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end  ,
-                            children: [
-                              TextButton(onPressed: () {
-                                setState(() {
-                                  if(items[index].quantity != 0)
-                                    {
-                                      items[index].quantity-=1;
-                                    }
+                        elevation: 2,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 80,
+                              width: 80,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  items[index].name,
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'price - ${items[index].price}',
+                                  style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal),
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 90,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      if (items[index].quantity != 0) {
+                                        CartItem item = boxCartItems.get(items[index].id);
 
-                                });
-                              }, child: const Icon(Icons.remove)),
-                              Text('${items[index].quantity}'),
-                              TextButton(onPressed: () {
-                                setState(() {
-                                  items[index].quantity+=1;
-                                });
-                              }, child: const Icon(Icons.add)),
-                            ],
-                          )
+                                        if(item.quantity == 1) {
+                                          boxCartItems.delete(items[index].id);
+                                        } else {
+                                          item.quantity -= 1;
+                                          boxCartItems.put(items[index].id, item);
+                                        }
+                                      }
 
-                        ],
-                      )
-                    );
+                                      setState(() {
+                                        if (items[index].quantity != 0) {
+                                          items[index].quantity -= 1;
+                                        }
+                                      });
+                                    },
+                                    child: const Icon(Icons.remove)),
+                                Text('${items[index].quantity}'),
+                                TextButton(
+                                    onPressed: () {
+                                      // boxCartItems
+
+                                      if (boxCartItems
+                                          .containsKey(items[index].id)) {
+                                        CartItem item = boxCartItems.get(items[index].id);
+
+                                        item.quantity += 1;
+
+                                        boxCartItems.put(items[index].id, item);
+                                      } else {
+                                        boxCartItems.put(
+                                            items[index].id,
+                                            CartItem(
+                                                id: items[index].id,
+                                                name: items[index].name,
+                                                price: items[index].price,
+                                                quantity:
+                                                    items[index].quantity + 1,
+                                                storeId: items[index].storeId,
+                                                storeName:
+                                                    items[index].storeName));
+                                      }
+
+                                      setState(() {
+                                        items[index].quantity += 1;
+                                      });
+                                    },
+                                    child: const Icon(Icons.add)),
+                              ],
+                            )
+                          ],
+                        ));
                   },
                 )
               : const Center(
@@ -167,7 +216,6 @@ class _MenuPageState extends State<MenuPage> {
     ));
   }
 }
-
 
 //
 // class CustomListItem extends StatelessWidget {

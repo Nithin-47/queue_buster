@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:queue_buster/constants/route_names.dart';
 import 'package:queue_buster/pages/email_verification.dart';
@@ -52,7 +53,7 @@ final GoRouter goRouter =
             GoRoute(
                 path: "${RouteNames.menu.path}/:id",
                 builder: (context, state) => MenuPage(
-                  id:int.parse(state.pathParameters["id"]!)
+                  storeId:int.parse(state.pathParameters["id"]!)
                 )),
           ],
         ),
