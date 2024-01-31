@@ -101,7 +101,7 @@ class _StoresPageState extends State<StoresPage> {
           //     ),
           //   ),
           // ),
-          const SearchBarApp(),
+          // const SearchBarApp(),
           // Container(
           //   // filtersZ4p (35:25)
           //   margin: const EdgeInsets.fromLTRB(0, 0, 0, 39),

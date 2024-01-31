@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                               const Padding(
                                 padding: EdgeInsets.only(top: 5, right: 30),
                                 child: Text(
-                                  'Kudla',
+                                  "BMSCE",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 10,),
-              const SearchBarApp(),
+              // const SearchBarApp(),
 
               // Padding(
               //   padding: const EdgeInsets.only(top: 20, bottom: 20),
