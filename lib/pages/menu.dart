@@ -35,7 +35,7 @@ class _MenuPageState extends State<MenuPage> {
           .eq('store_id', widget.id);
 
       for (var elements in data) {
-        debugPrint("hey there!");
+        // debugPrint("hey there!");
         items.add(Item(itemName: elements["name"], price: elements["price"], quantity: 0));
         setState(() {});
       }
@@ -80,7 +80,7 @@ class _MenuPageState extends State<MenuPage> {
             child: const Column(children: [
               Center(
                 child: Text(
-                  'Lund Ke Baal',
+                  'Lol ke bache',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 35,

@@ -20,10 +20,10 @@ class _StoresPageState extends State<StoresPage> {
 
   void getData() async {
     try {
-      final data = await supabase.from('stores').select("name,id");
+      final data = await supabase.from('stores').select("name,id,image_url");
 
       for (var shop in data) {
-        shops.add(Shop(name: shop["name"], photo: "", id: shop["id"]));
+        shops.add(Shop(name: shop["name"], photo: shop["image_url"], id: shop["id"]));
 
         setState(() {});
       }
@@ -211,7 +211,7 @@ class _StoresPageState extends State<StoresPage> {
                   },
                   child: Card(
                     child: ListTile(
-                      leading: Image(image: AssetImage(shops[index].photo)),
+                      leading: Image(image: NetworkImage(shops[index].photo)),
                       title: Text(shops[index].name),
                       // subtitle: const Text('Here is a second line'),
                       // trailing: const Icon(Icons.more_vert),

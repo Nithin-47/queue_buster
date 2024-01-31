@@ -420,7 +420,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         Image(
-                          image: AssetImage(foods[index].photo),
+                          image: NetworkImage(foods[index].photo),
                           height: 60,
                           width: 60,
                         ),
