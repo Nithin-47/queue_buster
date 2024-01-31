@@ -213,8 +213,8 @@ class _StoresPageState extends State<StoresPage> {
                     child: ListTile(
                       leading: Image(image: AssetImage(shops[index].photo)),
                       title: Text(shops[index].name),
-                      subtitle: const Text('Here is a second line'),
-                      trailing: const Icon(Icons.more_vert),
+                      // subtitle: const Text('Here is a second line'),
+                      // trailing: const Icon(Icons.more_vert),
                     ),
                   ),
                 );
