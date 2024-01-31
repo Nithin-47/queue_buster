@@ -24,9 +24,7 @@ final GoRouter goRouter =
     path: RouteNames.emailVerification.path,
     builder: (context, state) => const EmailVerificationPage(),
   ),
-  GoRoute(
-      path: RouteNames.selectLocation.path,
-      builder: (context, state) => const SelectLocationPage()),
+
   GoRoute(
     path: RouteNames.profile.path,
     builder: (context, state) => ProfilePage(),
@@ -40,6 +38,10 @@ final GoRouter goRouter =
             GoRoute(
                 path: RouteNames.home.path,
                 builder: (context, state) => const HomePage()),
+            GoRoute(
+                path: RouteNames.selectLocation.path,
+                builder: (context, state) => const SelectLocationPage()),
+
           ],
         ),
         StatefulShellBranch(
