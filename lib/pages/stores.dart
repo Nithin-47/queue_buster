@@ -20,12 +20,10 @@ class _StoresPageState extends State<StoresPage> {
 
   void getData() async {
     try {
-      final data = await supabase.from('stores').select('name');
+      final data = await supabase.from('stores').select("name,id");
 
-      for (var elements in data) {
-        elements.forEach((_, shopName) {
-          shops.add(Shop(name: shopName, photo: ""));
-        });
+      for (var shop in data) {
+        shops.add(Shop(name: shop["name"], photo: "", id: shop["id"]));
 
         setState(() {});
       }
@@ -209,7 +207,7 @@ class _StoresPageState extends State<StoresPage> {
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
-                    context.push(RouteNames.menu.path);
+                    context.push("${RouteNames.menu.path}/${shops[index].id}");
                   },
                   child: Card(
                     child: ListTile(

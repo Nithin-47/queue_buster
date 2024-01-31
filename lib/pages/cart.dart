@@ -14,17 +14,17 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   List<CartItems> cartitems = [
     CartItems(name: 'Gowda Canteen', location: 'BMS College', items: [
-      Item(itemName: 'Veg Fried Maggie', price: '40'),
-      Item(itemName: 'Kurkure', price: '20'),
-      Item(itemName: 'Samosa', price: '20'),
-      Item(itemName: 'Paneer Roll', price: '60')
+      Item(itemName: 'Veg Fried Maggie', price: 40,quantity: 0),
+      Item(itemName: 'Kurkure', price: 20,quantity: 0),
+      Item(itemName: 'Samosa', price: 20,quantity: 0),
+      Item(itemName: 'Paneer Roll', price: 60,quantity: 0)
     ]),
-    CartItems(name: 'Just Bake', location: 'BMS College', items: [
-      Item(itemName: 'Veg Fried Maggie', price: '40'),
-      Item(itemName: 'Kurkure', price: '20'),
-      Item(itemName: 'Samosa', price: '20'),
-      Item(itemName: 'Paneer Roll', price: '60')
-    ]),
+    // CartItems(name: 'Just Bake', location: 'BMS College', items: [
+    //   Item(itemName: 'Veg Fried Maggie', price: '40'),
+    //   Item(itemName: 'Kurkure', price: '20'),
+    //   Item(itemName: 'Samosa', price: '20'),
+    //   Item(itemName: 'Paneer Roll', price: '60')
+    // ]),
   ];
 
   // List<CartItems> cartitems = [];

@@ -30,10 +30,10 @@ class _HomePageState extends State<HomePage> {
   ];
 
   List<Shop> shops = [
-    Shop(name: 'Gowda Canteen', photo: 'Assets/login.png'),
-    Shop(name: 'Just Bake', photo: 'Assets/login.png'),
-    Shop(name: 'Vidyarthi Khaana', photo: 'Assets/login.png'),
-    Shop(name: 'Anna Tea Guy', photo: 'Assets/login.png'),
+    Shop(name: 'Gowda Canteen', photo: 'Assets/login.png',id: 2),
+    Shop(name: 'Just Bake', photo: 'Assets/login.png',id: 1),
+    Shop(name: 'Vidyarthi Khaana', photo: 'Assets/login.png',id: 1),
+    Shop(name: 'Anna Tea Guy', photo: 'Assets/login.png',id: 2),
   ];
 
   @override

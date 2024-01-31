@@ -48,8 +48,10 @@ final GoRouter goRouter =
                 path: RouteNames.stores.path,
                 builder: (context, state) => const StoresPage()),
             GoRoute(
-                path: RouteNames.menu.path,
-                builder: (context, state) => const MenuPage()),
+                path: "${RouteNames.menu.path}/:id",
+                builder: (context, state) => MenuPage(
+                  id:int.parse(state.pathParameters["id"]!)
+                )),
           ],
         ),
         StatefulShellBranch(
