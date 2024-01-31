@@ -15,8 +15,9 @@ class CartItems{
 class Item{
 
   String itemName;
-  String price;
+  int price;
+  int quantity;
 
-  Item({required this.itemName,required this.price});
+  Item({required this.itemName,required this.price, required this.quantity});
 
 }

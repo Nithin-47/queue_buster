@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:queue_buster/constants/cart_items.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
 
+import '../main.dart';
+
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
@@ -12,18 +14,50 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   List<CartItems> cartitems = [
     CartItems(name: 'Gowda Canteen', location: 'BMS College', items: [
-      Item(itemName: 'Veg Fried Maggie', price: '40'),
-      Item(itemName: 'Kurkure', price: '20'),
-      Item(itemName: 'Samosa', price: '20'),
-      Item(itemName: 'Paneer Roll', price: '60')
+      Item(itemName: 'Veg Fried Maggie', price: 40,quantity: 0),
+      Item(itemName: 'Kurkure', price: 20,quantity: 0),
+      Item(itemName: 'Samosa', price: 20,quantity: 0),
+      Item(itemName: 'Paneer Roll', price: 60,quantity: 0)
     ]),
-    CartItems(name: 'Just Bake', location: 'BMS College', items: [
-      Item(itemName: 'Veg Fried Maggie', price: '40'),
-      Item(itemName: 'Kurkure', price: '20'),
-      Item(itemName: 'Samosa', price: '20'),
-      Item(itemName: 'Paneer Roll', price: '60')
-    ]),
+    // CartItems(name: 'Just Bake', location: 'BMS College', items: [
+    //   Item(itemName: 'Veg Fried Maggie', price: '40'),
+    //   Item(itemName: 'Kurkure', price: '20'),
+    //   Item(itemName: 'Samosa', price: '20'),
+    //   Item(itemName: 'Paneer Roll', price: '60')
+    // ]),
   ];
+
+  // List<CartItems> cartitems = [];
+  //
+  // void getData() async {
+  //   try {
+  //     final data = await supabase.from('items').select('name');
+  //
+  //     for (var elements in data) {
+  //       elements.forEach((_, shopName) {
+  //         shops.add(Shop(name: shopName, photo: ""));
+  //       });
+  //
+  //       setState(() {});
+  //     }
+  //   } catch (e) {
+  //     debugPrint("Error: $e");
+  //   }
+  // }
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   getData();
+  //
+  //   // resData.forEach((element) { })
+  // }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {

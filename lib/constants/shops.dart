@@ -1,11 +1,12 @@
 
 
-class Shops{
+class Shop {
 
   String name;
   String photo;
+  int id;
 
-  Shops({required this.name,required this.photo});
+  Shop({required this.name, required this.photo, required this.id});
 
 
 
