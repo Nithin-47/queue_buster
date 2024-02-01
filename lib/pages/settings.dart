@@ -8,7 +8,7 @@ class ProfileInfo extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(7, 40, 10, 30),
         padding: const EdgeInsets.fromLTRB(4.2, 3.3, 3.5, 1.4),
         width: double.infinity,
-        height: 120,
+        height: 100,
         decoration: BoxDecoration(
           color: const Color(0xFFbcebf0),
           borderRadius: BorderRadius.circular(30),

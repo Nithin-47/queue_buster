@@ -187,17 +187,107 @@ class _CartPageState extends State<CartPage> {
                                   padding: const EdgeInsets.all(8),
                                   itemCount: groupedItems[index].length,
                                   itemBuilder: (BuildContext context, int i) {
+                                    // return Card(
+                                    //   child: ListTile(
+                                    //     leading: Text(
+                                    //         '${groupedItems[index][i].name} - Rs ${groupedItems[index][i].price}'),
+                                    //     trailing: TextButton(
+                                    //         onPressed: () async {
+                                    //           await removeItem(groupedItems[index][i].id);
+                                    //         },
+                                    //         child: const Icon(Icons.delete)),
+                                    //   ),
+                                    // );
                                     return Card(
-                                      child: ListTile(
-                                        leading: Text(
-                                            '${groupedItems[index][i].name} - Rs ${groupedItems[index][i].price}'),
-                                        trailing: TextButton(
-                                            onPressed: () async {
-                                              await removeItem(groupedItems[index][i].id);
-                                            },
-                                            child: const Icon(Icons.delete)),
-                                      ),
-                                    );
+                                        elevation: 2,
+
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            // CircleAvatar(
+                                            //   backgroundImage: NetworkImage(groupedItems[index].imageUrl!),
+                                            //   radius: 40,
+                                            // ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  '${groupedItems[index][i].name} - Price: ${groupedItems[index][i].price}',
+                                                  style: const TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                                // Text(
+                                                //   'price - ${items[index].price}',
+                                                //   style: const TextStyle(
+                                                //       fontSize: 14,
+                                                //       fontWeight: FontWeight.normal),
+                                                // )
+                                              ],
+                                            ),
+                                            // const SizedBox(
+                                            //   width: 80,
+                                            // ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.end,
+                                              children: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      if (groupedItems[index][i].quantity != 0) {
+                                                        CartItem item = boxCartItems.get(groupedItems[index][i].id);
+
+                                                        if(item.quantity == 1) {
+                                                          boxCartItems.delete(groupedItems[index][i].id);
+                                                        } else {
+                                                          item.quantity -= 1;
+                                                          boxCartItems.put(groupedItems[index][i].id, item);
+                                                        }
+                                                      }
+
+                                                      setState(() {
+                                                        // if (groupedItems[index][i].quantity != 0) {
+                                                        //   groupedItems[index][i].setQuantity(groupedItems[index][i].quantity! - 1);
+                                                        //   // groupedItems[index].quantity -= 1;
+                                                        // }
+                                                      });
+                                                    },
+                                                    child: const Icon(Icons.remove)),
+                                                Text('${groupedItems[index][i].quantity}'),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      // boxCartItems
+
+                                                      if (boxCartItems
+                                                          .containsKey(groupedItems[index][i].id)) {
+                                                        CartItem item = boxCartItems.get(groupedItems[index][i].id);
+
+                                                        item.quantity += 1;
+
+                                                        boxCartItems.put(groupedItems[index][i].id, item);
+                                                      } else {
+                                                        boxCartItems.put(
+                                                            groupedItems[index][i].id,
+                                                            CartItem(
+                                                                id: groupedItems[index][i].id!,
+                                                                name: groupedItems[index][i].name!,
+                                                                price: groupedItems[index][i].price!,
+                                                                quantity:
+                                                                groupedItems[index][i].quantity! + 1,
+                                                                storeId: groupedItems[index][i].storeId!,
+                                                                storeName:
+                                                                groupedItems[index][i].storeName!));
+                                                      }
+
+                                                      setState(() {
+                                                        // groupedItems[index][i].setQuantity(groupedItems[index][i].quantity! + 1);
+                                                        // groupedItems[index].quantity! += 1;
+                                                      });
+                                                    },
+                                                    child: const Icon(Icons.add)),
+                                              ],
+                                            )
+                                          ],
+                                        ));
                                   },
                                 ),
                               ),

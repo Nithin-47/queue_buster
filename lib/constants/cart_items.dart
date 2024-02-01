@@ -7,18 +7,26 @@ class CartItems {
 }
 
 class Item {
-  int id;
-  String name;
-  int price;
-  int quantity;
-  int storeId;
-  String storeName;
+  int? id;
+  String? name;
+  int? price;
+  int? quantity;
+  int? storeId;
+  String? storeName;
+  String? storeImageUrl;
+  String? imageUrl;
 
   Item(
-      {required this.id,
-      required this.name,
-      required this.price,
-      required this.quantity,
-      required this.storeId,
-      required this.storeName});
+      {this.id,
+      this.name,
+      this.price,
+      this.quantity,
+      this.storeId,
+      this.storeName,
+        this.storeImageUrl,
+      this.imageUrl});
+
+  void setQuantity(int newVal) {
+    quantity = newVal;
+  }
 }

@@ -209,12 +209,32 @@ class _StoresPageState extends State<StoresPage> {
                   onTap: () {
                     context.push("${RouteNames.menu.path}/${shops[index].id}");
                   },
-                  child: Card(
-                    child: ListTile(
-                      leading: Image(image: NetworkImage(shops[index].photo)),
-                      title: Text(shops[index].name),
-                      // subtitle: const Text('Here is a second line'),
-                      // trailing: const Icon(Icons.more_vert),
+                  child: Container(
+                    height: 150,
+                    child: Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(shops[index].photo),
+                            radius: 50,
+                          ),
+                          Text(shops[index].name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),),
+                        ],
+                      ),
+
+
+
+                      // ListTile(
+                      //   leading: Image(image: NetworkImage(shops[index].photo)),
+                      //   title: Text(shops[index].name),
+                      //   // subtitle: const Text('Here is a second line'),
+                      //   // trailing: const Icon(Icons.more_vert),
+                      // ),
                     ),
                   ),
                 );

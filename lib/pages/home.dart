@@ -7,6 +7,7 @@ import 'package:queue_buster/constants/foods.dart';
 import 'package:queue_buster/constants/shops.dart';
 import 'package:queue_buster/widgets/search_bar.dart';
 
+import '../constants/cart_items.dart';
 import '../main.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,18 +21,26 @@ class _HomePageState extends State<HomePage> {
 
 
   List<Shop> shops = [];
+  List<Item> items = [];
 
   // bool isLoading = true;
 
   void getData() async {
     try {
-      final data = await supabase.from('stores').select("name,id");
+      final data = await supabase.from('stores').select("name,id,image_url");
+      final data2 = await supabase.from('items').select("*");
 
       for (var shop in data) {
-        shops.add(Shop(name: shop["name"], photo: "", id: shop["id"]));
+        shops.add(Shop(name: shop["name"], photo: shop["image_url"], id: shop["id"]));
 
-        setState(() {});
       }
+
+      for (var item in data2) {
+        items.add(Item(name: item["name"], imageUrl: item["image_url"], id: item["id"], price: item["price"]));
+      }
+
+      setState(() {});
+
     } catch (e) {
       debugPrint("Error: $e");
     }
@@ -46,18 +55,18 @@ class _HomePageState extends State<HomePage> {
     // resData.forEach((element) { })
   }
 
-  List<Foods> foods = [
-    Foods(name: 'Pizza', photo: 'Assets/login.png'),
-    Foods(name: 'Burger', photo: 'Assets/login.png'),
-    Foods(name: 'Tea', photo: 'Assets/login.png'),
-    Foods(name: 'Coffee', photo: 'Assets/login.png'),
-    Foods(name: 'Biryani', photo: 'Assets/login.png'),
-    Foods(name: 'Biscuits', photo: 'Assets/login.png'),
-    Foods(name: 'Chiya', photo: 'Assets/login.png'),
-    Foods(name: 'Maggie', photo: 'Assets/login.png'),
-    Foods(name: 'Puffs', photo: 'Assets/login.png'),
-    Foods(name: 'Samosa', photo: 'Assets/login.png'),
-  ];
+  // List<Foods> foods = [
+  //   Foods(name: 'Pizza', photo: 'Assets/login.png'),
+  //   Foods(name: 'Burger', photo: 'Assets/login.png'),
+  //   Foods(name: 'Tea', photo: 'Assets/login.png'),
+  //   Foods(name: 'Coffee', photo: 'Assets/login.png'),
+  //   Foods(name: 'Biryani', photo: 'Assets/login.png'),
+  //   Foods(name: 'Biscuits', photo: 'Assets/login.png'),
+  //   Foods(name: 'Chiya', photo: 'Assets/login.png'),
+  //   Foods(name: 'Maggie', photo: 'Assets/login.png'),
+  //   Foods(name: 'Puffs', photo: 'Assets/login.png'),
+  //   Foods(name: 'Samosa', photo: 'Assets/login.png'),
+  // ];
 
   // List<Shop> shops = [
   //   Shop(name: 'Gowda Canteen', photo: 'Assets/login.png',id: 2),
@@ -159,7 +168,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 10,),
-          const SearchBarApp(),
+          // const SearchBarApp(),
 
           // Padding(
           //   padding: const EdgeInsets.only(top: 20, bottom: 20),
@@ -391,7 +400,7 @@ class _HomePageState extends State<HomePage> {
             height: 180,
             child: GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 6),
-              itemCount: foods.length,
+              itemCount: items.length,
 
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 8,
@@ -416,15 +425,20 @@ class _HomePageState extends State<HomePage> {
                   // ),
                   child: Container(
 
-                    color: Colors.grey,
+                    // color: Colors.grey,
                     child: Column(
                       children: [
-                        Image(
-                          image: NetworkImage(foods[index].photo),
-                          height: 60,
-                          width: 60,
+                        InkWell(
+                          onTap: () {
+                            context.go(RouteNames.stores.path);
+                          },
+                          child: Image(
+                            image: NetworkImage(items[index].imageUrl ?? "Food"),
+                            height: 60,
+                            width: 60,
+                          ),
                         ),
-                        Text(foods[index].name)
+                        Text(items[index].name ?? "food")
                       ],
                     ),
                   ),
@@ -456,7 +470,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(top: 18.0, left: 0),
+                    padding: EdgeInsets.only(top: 18.0, left: 0,bottom: 12),
                     child: Text(
                       'Canteens Right on You',
                       style: TextStyle(
@@ -465,18 +479,27 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
+                    child: const Divider(
+                      height: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
                   SizedBox(
-                    height: 270,
+
+                    height: 350,
+
                     width: double.infinity,
                     child:shops.isNotEmpty ? GridView.builder(
-                      padding: const EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(18),
                       itemCount: shops.length,
 
                       gridDelegate:
                       const SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisSpacing: 24,
-                          crossAxisSpacing: 24,
-                          childAspectRatio: 1.8,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
+                          childAspectRatio: 1,
                           crossAxisCount: 2
                       ),
                       // Try uncommenting some of these properties to see the effect on the grid:
@@ -495,13 +518,17 @@ class _HomePageState extends State<HomePage> {
                             //       style: const TextStyle(color: Colors.black)),
                             // ),
                             child: Container(
-                              color: Colors.grey,
+                              // color: Colors.grey,
                               child: Column(
                                 children: [
                                   Image(
-                                    image: AssetImage(shops[index].photo),
-                                    height: 60,
-                                    width: 60,
+
+                                    image: NetworkImage(
+                                      shops[index].photo,
+
+                                    ),
+                                    height: 120,
+                                    width: 120,
                                   ),
                                   Text(shops[index].name)
                                 ],

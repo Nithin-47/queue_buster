@@ -32,7 +32,7 @@ class _MenuPageState extends State<MenuPage> {
     try {
       final data = await supabase
           .from('items')
-          .select('id,name,price,store_id, stores(name)')
+          .select('id,name,price,store_id,stores(image_url,name),image_url')
           .eq('store_id', widget.storeId);
 
       for (var elements in data) {
@@ -42,6 +42,8 @@ class _MenuPageState extends State<MenuPage> {
             price: elements["price"],
             storeId: elements["store_id"],
             storeName: elements["stores"]["name"],
+            storeImageUrl: elements["stores"]["image_url"],
+            imageUrl: elements["image_url"],
             quantity: 0));
         setState(() {});
       }
@@ -63,18 +65,18 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Column(
-      children: [
-        Expanded(
-          flex: 1,
-          // height: 450,
-          // width: double.infinity,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+        SizedBox(
+          height: 220,
+          width: double.infinity,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.vertical(
                 // bottom: Radius.circular(30),
                 top: Radius.zero,
               ),
-              color: Colors.grey[400],
+              color: Colors.lightGreen[400],
               boxShadow: const [
                 BoxShadow(
                     blurRadius: 5,
@@ -83,11 +85,11 @@ class _MenuPageState extends State<MenuPage> {
                     offset: Offset(2.0, 0.0))
               ],
             ),
-            child: const Column(children: [
+            child: Column(children: [
               Center(
                 child: Text(
-                  'Lund Ke Baal',
-                  style: TextStyle(
+                  items[0].storeName!,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 35,
                   ),
@@ -95,7 +97,7 @@ class _MenuPageState extends State<MenuPage> {
               ),
               Center(
                 child: CircleAvatar(
-                  // backgroundImage: ,
+                  backgroundImage: NetworkImage(items[0].storeImageUrl!),
                   radius: 60,
                 ),
               )
@@ -117,92 +119,99 @@ class _MenuPageState extends State<MenuPage> {
                   padding: const EdgeInsets.all(8),
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                        elevation: 2,
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 80,
-                              width: 80,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  items[index].name,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  'price - ${items[index].price}',
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 90,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      if (items[index].quantity != 0) {
-                                        CartItem item = boxCartItems.get(items[index].id);
+                    return SizedBox(
+                      height: 150,
+                      child: Card(
+                          elevation: 2,
 
-                                        if(item.quantity == 1) {
-                                          boxCartItems.delete(items[index].id);
-                                        } else {
-                                          item.quantity -= 1;
-                                          boxCartItems.put(items[index].id, item);
-                                        }
-                                      }
-
-                                      setState(() {
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(items[index].imageUrl!),
+                                radius: 40,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    items[index].name!,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'price - ${items[index].price}',
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal),
+                                  )
+                                ],
+                              ),
+                              // const SizedBox(
+                              //   width: 80,
+                              // ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                      onPressed: () {
                                         if (items[index].quantity != 0) {
-                                          items[index].quantity -= 1;
+                                          CartItem item = boxCartItems.get(items[index].id);
+
+                                          if(item.quantity == 1) {
+                                            boxCartItems.delete(items[index].id);
+                                          } else {
+                                            item.quantity -= 1;
+                                            boxCartItems.put(items[index].id, item);
+                                          }
                                         }
-                                      });
-                                    },
-                                    child: const Icon(Icons.remove)),
-                                Text('${items[index].quantity}'),
-                                TextButton(
-                                    onPressed: () {
-                                      // boxCartItems
 
-                                      if (boxCartItems
-                                          .containsKey(items[index].id)) {
-                                        CartItem item = boxCartItems.get(items[index].id);
+                                        setState(() {
+                                          if (items[index].quantity != 0) {
+                                            items[index].setQuantity(items[index].quantity! - 1);
+                                            // items[index].quantity -= 1;
+                                          }
+                                        });
+                                      },
+                                      child: const Icon(Icons.remove)),
+                                  Text('${items[index].quantity}'),
+                                  TextButton(
+                                      onPressed: () {
+                                        // boxCartItems
 
-                                        item.quantity += 1;
+                                        if (boxCartItems
+                                            .containsKey(items[index].id)) {
+                                          CartItem item = boxCartItems.get(items[index].id);
 
-                                        boxCartItems.put(items[index].id, item);
-                                      } else {
-                                        boxCartItems.put(
-                                            items[index].id,
-                                            CartItem(
-                                                id: items[index].id,
-                                                name: items[index].name,
-                                                price: items[index].price,
-                                                quantity:
-                                                    items[index].quantity + 1,
-                                                storeId: items[index].storeId,
-                                                storeName:
-                                                    items[index].storeName));
-                                      }
+                                          item.quantity += 1;
 
-                                      setState(() {
-                                        items[index].quantity += 1;
-                                      });
-                                    },
-                                    child: const Icon(Icons.add)),
-                              ],
-                            )
-                          ],
-                        ));
+                                          boxCartItems.put(items[index].id, item);
+                                        } else {
+                                          boxCartItems.put(
+                                              items[index].id,
+                                              CartItem(
+                                                  id: items[index].id!,
+                                                  name: items[index].name!,
+                                                  price: items[index].price!,
+                                                  quantity:
+                                                      items[index].quantity! + 1,
+                                                  storeId: items[index].storeId!,
+                                                  storeName:
+                                                      items[index].storeName!));
+                                        }
+
+                                        setState(() {
+                                          items[index].setQuantity(items[index].quantity! + 1);
+                                          // items[index].quantity! += 1;
+                                        });
+                                      },
+                                      child: const Icon(Icons.add)),
+                                ],
+                              )
+                            ],
+                          )),
+                    );
                   },
                 )
               : const Center(

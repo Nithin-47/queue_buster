@@ -22,6 +22,10 @@ class CartItem {
   @HiveField(5)
   final String storeName;
 
+  void setQuantity(int newVal) {
+    quantity = newVal;
+  }
+
   CartItem({
     required this.id,
     required this.name,
